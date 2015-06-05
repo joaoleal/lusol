@@ -45,7 +45,8 @@ module lusol
 
   implicit none
   private
-  public    :: lu1fac, lu6sol, lu8rpc
+  public    :: lu1fac, lu6sol, lu8rpc, lu1rec, &
+               lu7cyc, lu7elm, lu7for, lu7rnk, lu7zap
   private   :: jdamax
   intrinsic :: abs, int, max, min, real
 

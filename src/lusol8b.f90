@@ -184,7 +184,7 @@ contains
         lrow       = lrow + 1
         a(lrow)    = w(j)
         indr(lrow) = j
-    120 END DO
+    120 end do
 
     lenw    = lrow + 1 - locr(m)
     lenu    = lenu + lenw
@@ -508,7 +508,7 @@ contains
             if (i < idel) go to 320
             p(k) = i - 1
             if (i == idel) p(k) = m
-        320 END DO
+        320 end do
 
         lenl   = luparm(23)
         l1     = lena + 1 - lenl
@@ -523,7 +523,7 @@ contains
             if (i < idel) go to 400
             indr(l) = i - 1
             if (i == idel) indr(l) = m
-        400 END DO
+        400 end do
     end if
 
     go to 990
@@ -704,7 +704,7 @@ contains
         indr(lw) = j
         indc(lw) = 0
         locc(j)  = lw
-    320 END DO
+    320 end do
 
     lw1    = lw
     lw2    = lfree
@@ -740,7 +740,7 @@ contains
                      lena, luparm, parmlu, &
                      lenu, lrow, &
                      a, indc, indr, lenr, locc, locr )
-    450 END DO
+    450 end do
 
 !     ------------------------------------------------------------------
 !     Add a multiple of  w  to row  iw  of  U.

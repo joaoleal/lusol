@@ -78,6 +78,7 @@ Building the LUSOL interface in other environments may require modification of
 
 Linux:
 
+* `cmake`
 * `make`
 * `gcc`
 * `gfortran`
@@ -86,6 +87,7 @@ Linux:
 Mac:
 
 * [Xcode][XC] for `clang` and `make`
+* `cmake`
 * `gfortran-4.3` (possibly via [Homebrew][HB])
 * Matlab
 

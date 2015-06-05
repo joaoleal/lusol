@@ -270,7 +270,7 @@ contains
         do 230 l = lw1, lw2
             jw       = indr(l)
             locc(jw) = 0
-        230 END DO
+        230 end do
 
     !        ---------------------------------------------------------------
     !        Set markers on the new row  iw.
@@ -285,7 +285,7 @@ contains
             jw       = indr(lw)
             locc(jw) = lw
             indc(lw) = 0
-        260 END DO
+        260 end do
 
     !        ---------------------------------------------------------------
     !        Form the multiplier and store it in the L file.
@@ -329,7 +329,7 @@ contains
         diag      = a(l)
         a(l)      = a(lv1)
         a(lv1)    = diag
-    500 END DO
+    500 end do
 
 !     ==================================================================
 !     End of main elimination loop.

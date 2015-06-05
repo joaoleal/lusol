@@ -159,7 +159,7 @@ contains
             j     = indr(l)
             w(j)  = w(j)  +  a(l) * t
         end do
-    480 END DO
+    480 end do
 
     end ! subroutine lu6mul
 
@@ -368,7 +368,7 @@ contains
         indr(l) = i
         dumax   = max( dumax, abs( w(i) ) )
         dumin   = min( dumin, abs( w(i) ) )
-    100 END DO
+    100 end do
 
     nrank  = l
 
@@ -383,7 +383,7 @@ contains
         lenr(i) = 0
         nsing   = nsing + 1
         jsing   = i
-    200 END DO
+    200 end do
 
 ! Fix up the remaining parts of q.
 
@@ -393,7 +393,7 @@ contains
         if (w(j) /= zero) go to 300
         l       = l + 1
         q(l)   = j
-    300 END DO
+    300 end do
 
 !-----------------------------------
 ! Set output parameters for  mode 2.
