@@ -44,6 +44,7 @@ def load_interface_files(file_name):
         d['function_name'] = function_name
         d['argument_data'] = argument_data
         d['format'] = interface_function['format']
+        d['module'] = interface_function['module']
         interface_data.append(d)
     #print(interface_data)
     return interface_data
@@ -102,7 +103,7 @@ def get_source(file_name):
     f.write('// declarations for fortran function calls\n')
     for interface_func in interface_data:
         if interface_func['format'] == 'f90':
-            f.write(function_declaration(interface_func,prefix='__lusol_MOD_'))
+            f.write(function_declaration(interface_func,prefix='__' + interface_func['module'] + '_MOD_'))
         if interface_func['format'] == 'f77':
             f.write(function_declaration(interface_func,suffix='_'))
         f.write(';\n\n')
@@ -112,7 +113,7 @@ def get_source(file_name):
         f.write(function_declaration(interface_func,prefix='c'))
         f.write(' {\n')
         if interface_func['format'] == 'f90':
-            f.write(function_call(interface_func,prefix='__lusol_MOD_'))
+            f.write(function_call(interface_func,prefix='__' + interface_func['module'] + '_MOD_'))
         if interface_func['format'] == 'f77':
             f.write(function_call(interface_func,suffix='_'))
         f.write(';\n')
