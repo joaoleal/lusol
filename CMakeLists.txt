@@ -142,7 +142,6 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 ##
 
 #SET(Matlab_MAIN_PROGRAM "~/MATLAB/R2015a/bin/matlab" CACHE PATH "Path to the root instalation directory of Matlab")
-MESSAGE(WARNING "Matlab_MAIN_PROGRAM=${Matlab_MAIN_PROGRAM}")
 IF(Matlab_MAIN_PROGRAM_FOUND)
   ADD_SUBDIRECTORY(matlab)
 ENDIF()
