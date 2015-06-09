@@ -23,8 +23,7 @@ ADD_CUSTOM_COMMAND(OUTPUT ${CLUSOL_LIB}
                    COMMAND ${CMAKE_COMMAND} -E copy ${CLUSOL_LIB_PATH} ${CLUSOL_LIB}
                    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/../clusol.h" "clusol.h"
                    DEPENDS clusol clusol_header)
-                   
-MESSAGE("INSOURCEBUILD: ${INSOURCEBUILD}")
+
 IF(NOT ${INSOURCEBUILD})
   SET(LUSOL_BUILD "lusol_build.m")
   ADD_CUSTOM_COMMAND(OUTPUT lusol_build.m
@@ -33,7 +32,7 @@ ENDIF()
                    
 ADD_CUSTOM_COMMAND(OUTPUT "libclusol_thunk_${MLARCH}${CMAKE_SHARED_LIBRARY_SUFFIX}"
                           "libclusol_proto_${MLARCH}.m"
-                   COMMAND ${MATLAB_ROOT}/bin/matlab ARGS -nojvm -nodisplay -nosplash -nodesktop -r \"lusol_build\; exit\;\"
+                   COMMAND ${Matlab_MAIN_PROGRAM} ARGS -nojvm -nodisplay -nosplash -nodesktop -r \"lusol_build\; exit\;\"
                    DEPENDS ${CLUSOL_LIB} "clusol.h" ${LUSOL_BUILD}
                    COMMENT "Creating matlab files")
 

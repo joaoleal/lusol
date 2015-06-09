@@ -44,6 +44,9 @@ SET(INSTALL_SOURCE_LOCATION "${CMAKE_INSTALL_PREFIX}/share/lusol/src")
 ###########################################################################
 #         Dependencies
 ###########################################################################
+
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+
 #
 #             BLAS
 #
@@ -55,6 +58,7 @@ IF(LUSOL_BLAS_VENDOR STREQUAL "")
 ELSE()
   SET(BLA_VENDOR ${LUSOL_BLAS_VENDOR})
 ENDIF()
+
 FIND_PACKAGE(BLAS REQUIRED)
 IF(${BLAS_FOUND})
   MESSAGE(STATUS "BLAS: ${BLAS_LIBRARIES}")
@@ -63,7 +67,17 @@ ENDIF()
 #
 #             Matlab
 #
-FIND_PACKAGE(MATLAB)
+
+SET(MATLAB_FIND_DEBUG "YES")
+
+FIND_PACKAGE(MATLAB COMPONENTS MAIN_PROGRAM)
+
+IF(NOT Matlab_FOUND)
+  MESSAGE(WARNING "Matlab not found!\n Please define variable Matlab_ROOT_DIR if you would like to build LUSOL for Matlab.")
+  #SET(Matlab_ROOT_DIR "" CACHE PATH "Path to the root instalation directory of Matlab")
+ELSEIF(NOT Matlab_MAIN_PROGRAM_FOUND)
+  MESSAGE(WARNING "Matlab executable not found!")
+ENDIF()
 
 ###########################################################################
 #         Sources
@@ -127,8 +141,9 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #        Matlab
 ##
 
-SET(MATLAB_ROOT "~/MATLAB/R2015a/" CACHE PATH "Path to the root instalation directory of Matlab")
-IF(MATLAB_FOUND OR IS_DIRECTORY ${MATLAB_ROOT})
+#SET(Matlab_MAIN_PROGRAM "~/MATLAB/R2015a/bin/matlab" CACHE PATH "Path to the root instalation directory of Matlab")
+MESSAGE(WARNING "Matlab_MAIN_PROGRAM=${Matlab_MAIN_PROGRAM}")
+IF(Matlab_MAIN_PROGRAM_FOUND)
   ADD_SUBDIRECTORY(matlab)
 ENDIF()
                     
