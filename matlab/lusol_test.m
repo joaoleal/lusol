@@ -27,6 +27,7 @@ classdef lusol_test < handle
   properties
 
     data_dir = ''; % folder containing mat files
+    options = struct();
 
   end
 
@@ -46,6 +47,7 @@ classdef lusol_test < handle
 
     function obj = lusol_test()
       obj.set_data_dir();
+      obj.options = lusol_obj.luset('nzinit',1000000, 'pivot','TRP');
 
       % get cell of method names
       method_cell = methods(obj);
@@ -85,14 +87,14 @@ classdef lusol_test < handle
     function tf = test_factorize_lhr02(obj)
       %TEST_FACTORIZE_LHR02  test LUSOL factorization of lhr02 matrix
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       tf = mylu.inform() == 0;
     end
 
     function tf = test_solveA_lhr02(obj)
       %TEST_SOLVEA_LHR02  test LUSOL solve with lhr02 matrix
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       x = ones(n,1);
       b = A*x;
@@ -103,7 +105,7 @@ classdef lusol_test < handle
     function tf = test_solveAt_lhr02(obj)
       %TEST_SOLVEA_LHR02  test LUSOL solve with lhr02 matrix transpose
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       x = ones(n,1);
       b = A'*x;
@@ -114,7 +116,7 @@ classdef lusol_test < handle
     function tf = test_mulA_lhr02(obj)
       %TEST_MULA_LHR02  test LUSOL multiply with lhr02 matrix
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       x = ones(n,1);
       b = A*x;
@@ -125,7 +127,7 @@ classdef lusol_test < handle
     function tf = test_mulAt_lhr02(obj)
       %TEST_MULAT_LHR02  test LUSOL multiply with lhr02 matrix transpose
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       x = ones(n,1);
       b = A'*x;
@@ -136,7 +138,7 @@ classdef lusol_test < handle
     function tf = test_repcol_lhr02(obj)
       %TEST_REPCOL_LHR02  test LUSOL repcol with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       x = ones(n,1);
       inform = mylu.repcol(x,1);
@@ -153,7 +155,7 @@ classdef lusol_test < handle
     function tf = test_reprow_lhr02(obj)
       %TEST_REPROW_LHR02  test LUSOL reprow with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',1000000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       x = ones(n,1);
       inform = mylu.reprow(x,1);
@@ -170,7 +172,7 @@ classdef lusol_test < handle
     function tf = test_addcol_lhr02(obj)
       %TEST_ADDCOL_LHR02  test LUSOL addcol with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',100000);
+      mylu = lusol_obj(A, obj.options);
       [m nold] = size(A);
       % append a vector of ones
       x = ones(m,1);
@@ -190,7 +192,7 @@ classdef lusol_test < handle
     function tf = test_addrow_lhr02(obj)
       %TEST_ADDROW_LHR02  test LUSOL addrow with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',1000000);
+      mylu = lusol_obj(A, obj.options);
       [mold n] = size(A);
       % append a vector of ones
       x = ones(1,n);
@@ -210,7 +212,7 @@ classdef lusol_test < handle
     function tf = test_delcol_lhr02(obj)
       %TEST_DELCOL_LHR02  test LUSOL delcol with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',1000000);
+      mylu = lusol_obj(A, obj.options);
       [m nold] = size(A);
       % delete column 1
       inform = mylu.delcol(1);
@@ -229,7 +231,7 @@ classdef lusol_test < handle
     function tf = test_delrow_lhr02(obj)
       %TEST_DELROW_LHR02  test LUSOL delrow with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',1000000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       % delete row 1
       inform = mylu.delrow(1);
@@ -249,7 +251,7 @@ classdef lusol_test < handle
     function tf = test_r1mod_lhr02(obj)
       %TEST_r1mod_LHR02  test LUSOL r1mod with lhr02
       A = obj.load_matrix('lhr02.mat');
-      mylu = lusol_obj(A,'nzinit',1000000);
+      mylu = lusol_obj(A, obj.options);
       [m n] = size(A);
       % set up rank 1 modification
       v = ones(m,1);
